@@ -5,28 +5,21 @@
         (pdilemma util))
 
 ; (define actions '(cooperate defect))
-(define cooperate 'cooperate)
-(define defect 'defect)
-(define actions (list cooperate defect))
+(define cooperate 0)
+(define defect 1)
+(define actions (list 'cooperate 'defect))
 
-(define payoff-matrix '((3 3) (0 5)
-                        (5 0) (1 1)))
+(define payoff-matrix '(((3 3) (0 5))
+                        ((5 0) (1 1))))
 
 (define (payoff p1-action p2-action)
-  (cond ((and (eq? p1-action cooperate)
-              (eq? p2-action cooperate)) '(3 3))
-        ((and (eq? p1-action cooperate)
-              (eq? p2-action defect)) '(0 5))
-        ((and (eq? p1-action defect)
-              (eq? p2-action cooperate)) '(5 0))
-        ((and (eq? p1-action defect)
-              (eq? p2-action defect)) '(1 1))
+  (cond ((and (or (= p1-action cooperate)
+                  (= p1-action defect))
+              (or (= p2-action cooperate)
+                  (= p2-action defect)))
+         (list-ref 
+           (list-ref payoff-matrix p1-action) p2-action))
         (t (error 'payoff "Unknown actions ~a ~a" p1-action p2-action))))
 
-(define (p1-utility p1-action p2-action)
-  (first (payoff p1-action p2-action)))
 
-(define (p2-utility p1-action p2-action)
-  (second (payoff p1-action p2-action)))
-
-(display (flatten payoff-matrix))
+(display (payoff cooperate defect))
