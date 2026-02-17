@@ -8,9 +8,9 @@
 (assert-equal (first '(a b)) 'a "expect a")
 (assert-equal (second '(a b)) 'b "expect b")
 
-; (let-values ([(a b) (payoff 'C 'C)])
-  ; (assert-equal a 3 "C,C score A")
-  ; (assert-equal b 3 "C,C score B"))
+(assert-equal (flatten '(1 (2) (3 (4)))) 
+              '(1 2 3 4)
+              "expect (1 2 3 4)")
 
 (display "OK\n")
 
