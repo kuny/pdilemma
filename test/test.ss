@@ -5,7 +5,8 @@
   (unless (equal? a b)
     (error msg a b)))
 
-(assert-equal (add1 1) 2 "expect 1")
+(assert-equal (first '(a b)) 'a "expect a")
+(assert-equal (second '(a b)) 'b "expect b")
 
 ; (let-values ([(a b) (payoff 'C 'C)])
   ; (assert-equal a 3 "C,C score A")

@@ -1,6 +1,9 @@
 (library (pdilemma util)
-  (export add1)
-  (import (chezscheme)))
+  (export first second)
+  (import (chezscheme))
 
-(define (add1 x)
-  (+ x 1))
+  (define (first lst)
+    (car lst))
+
+  (define (second lst)
+    (car (cdr lst))))
