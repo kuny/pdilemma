@@ -2,6 +2,7 @@
 (import (chezscheme)
         (pdilemma util))
 
+(define actions '(cooperate defect))
 (display (add1 1))
 
 ; (let-values ([(a b ha hb) (play-match 100 tit-for-tat always-defect)])
