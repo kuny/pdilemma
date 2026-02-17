@@ -1,5 +1,8 @@
 (library (pdilemma util)
-  (export first second)
+  (export first 
+          second 
+          flatten
+          transpose)
   (import (chezscheme))
 	
   (define (first lst)
@@ -8,15 +11,17 @@
   (define (second lst)
     (car (cdr lst)))
 		
-		
-	(define (flatten lst)
-    (let loop ((lst lst) (acc '()))
-      (cond
-        ((null? lst) (reverse acc))
-        ((pair? (car lst))
-         (loop (cdr lst)
-             (loop (car lst) acc)))
-        (else
-         (loop (cdr lst)
-             (cons (car lst) acc))))))
+  (define (flatten x)
+    (let rec ((x x) (acc '()))
+      (cond ((null? x) acc)
+            ((atom? x) (cons x acc))
+            (else (rec
+                    (car x)
+                    (rec (cdr x) acc))))))
+
+  (define (transpose x)
+    (let ((flatten-x (flatten x)))
+      flatten-x))
+
+
 )
