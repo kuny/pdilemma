@@ -20,6 +20,7 @@
          (list-ref 
            (list-ref payoff-matrix p1-action) p2-action))
         (t (error 'payoff "Unknown actions ~a ~a" p1-action p2-action))))
-
+				
+(modulo 10 3)
 
 (display (payoff cooperate defect))
