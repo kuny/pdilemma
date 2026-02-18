@@ -3,11 +3,11 @@
 # Purpose:
 #--------------------------------------------------
 
-.PHONY: build run test
+.PHONY: run test
 
 run:
-	@chez --libdirs src:. --script src/main.ss
+	@chez --libdirs /Users/kuny/scheme/libs:src:. --script src/main.ss
 
 test:
-	@chez --libdirs src:. --script test/test.ss
+	@chez --libdirs /Users/kuny/scheme/libs:src:. --script test/test.ss
 
