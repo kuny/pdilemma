@@ -16,15 +16,9 @@
   (define player1 'player1)
   (define player2 'player2)
 
-  (define payoff-matrix '(((3 3) (0 5))
-                        ((5 0) (1 1))))
-
-#|
-(define payoff-table
-  (call-with-input-file "payoff.scm"
-    (lambda (p) (read p))))
-|#
-
+  (define payoff-matrix
+    (call-with-input-file "src/payoff.scm"
+                          (lambda (p) (read p))))
 
   (define p1-matrix payoff-matrix)
   (define p2-matrix (transpose payoff-matrix))
