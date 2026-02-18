@@ -1,11 +1,20 @@
 (library (pdilemma strategy)
-  (export minmax)
+  (export maxmini)
   (import (chezscheme)
           (atelier-kame util)
           (pdilemma util)
-					(pdilemma core))
-					
-	(define (minmax)
-	  (display "minmax strategy"))
-		
+          (pdilemma core))
+
+  (define (min-utility player my-action)
+    (let ((cu (utility player my-action cooperate))
+          (du (utility player my-action defect)))
+      (cond ((< cu du) cu)
+            (else du))))
+
+  (define (maxmini player)
+    (let ((cmin (min-utility player cooperate))
+          (dmin (min-utility player defect)))
+      (cond ((> cmin dmin) cooperate)
+            (else defect))))
+
 )

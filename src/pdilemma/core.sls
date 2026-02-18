@@ -3,9 +3,9 @@
           defect
           player1
           player2
-          player1-payoff
-          player2-payoff
-          payoff)
+          payoff
+          payoff+
+          utility)
   (import (chezscheme)
           (atelier-kame util)
           (pdilemma util))
@@ -13,8 +13,14 @@
 
   (define cooperate 0)
   (define defect 1)
+  (define actions (list cooperate defect))
+
   (define player1 'player1)
   (define player2 'player2)
+
+  (define (to-action-name action)
+    (cond ((= action cooperate) 'cooperate)
+          (else 'defect)))
 
   (define payoff-matrix
     (call-with-input-file "src/payoff.scm"
@@ -35,11 +41,13 @@
           (else
            (error 'payoff "Unknown actions ~a ~a" my-action opponent-action))))
 
-  (define (player1-payoff my-action opponent-action)
-    (payoff player1 my-action opponent-action))
+  (define (payoff+ player my-action opponent-action)
+    (let ((acts (list (to-action-name my-action) 
+                      (to-action-name  opponent-action)))
+          (po (payoff player my-action opponent-action)))
+      (list acts po)))
 
-  (define (player2-payoff my-action opponent-action)
-    (payoff player2 my-action opponent-action))
-
+  (define (utility player my-action opponent-action)
+    (car (payoff player my-action opponent-action)))
 
   )

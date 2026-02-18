@@ -3,10 +3,27 @@
 
 (import (chezscheme)
         (pdilemma util)
-        (pdilemma core))
-				
-(display (player1-payoff cooperate defect))
+        (pdilemma core)
+        (pdilemma strategy))
+
+; (cond ((= (maxmini player1) 0) 
+       ; (display "cooperate\n"))
+      ; (else
+        ; (display "defect")))
+
+(let ((p1-action (maxmini player1))
+      (p2-action (maxmini player2)))
+  (display (payoff+ player1 p1-action p2-action))
+  (newline))
+
+#|
+(display (payoff player1 cooperate defect))
 (newline)
 
-(display (player2-payoff defect cooperate))
+(display (payoff player1 defect cooperate))
 (newline)
+
+(display (utility player1 cooperate defect))
+(newline)
+|#
+
