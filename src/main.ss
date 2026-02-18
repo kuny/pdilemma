@@ -5,7 +5,8 @@
         (pdilemma util)
         (pdilemma core))
 				
-(display (payoff player1 cooperate defect))
+(display (player1-payoff cooperate defect))
 (newline)
-(display (payoff player2 cooperate defect))
+
+(display (player2-payoff defect cooperate))
 (newline)

@@ -3,6 +3,8 @@
           defect
           player1
           player2
+          player1-payoff
+          player2-payoff
           payoff)
   (import (chezscheme)
           (atelier-kame util)
@@ -16,6 +18,13 @@
 
   (define payoff-matrix '(((3 3) (0 5))
                         ((5 0) (1 1))))
+
+#|
+(define payoff-table
+  (call-with-input-file "payoff.scm"
+    (lambda (p) (read p))))
+|#
+
 
   (define p1-matrix payoff-matrix)
   (define p2-matrix (transpose payoff-matrix))
@@ -31,4 +40,12 @@
            (list-ref (list-ref (get-matrix player) my-action) opponent-action))
           (else
            (error 'payoff "Unknown actions ~a ~a" my-action opponent-action))))
-	)
+
+  (define (player1-payoff my-action opponent-action)
+    (payoff player1 my-action opponent-action))
+
+  (define (player2-payoff my-action opponent-action)
+    (payoff player2 my-action opponent-action))
+
+
+  )
