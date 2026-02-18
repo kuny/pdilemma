@@ -6,8 +6,8 @@
 .PHONY: run test
 
 run:
-	@chez --libdirs /Users/kuny/scheme/libs:src:. --script src/main.ss
+	@chez --script src/main.ss
 
 test:
-	@chez --libdirs /Users/kuny/scheme/libs:src:. --script test/test.ss
+	@chez --script test/test.ss
 
