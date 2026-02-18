@@ -8,19 +8,28 @@
 (define cooperate 0)
 (define defect 1)
 (define actions (list 'cooperate 'defect))
+(define player1 'player1)
+(define player2 'plalyer2)
 
 (define payoff-matrix '(((3 3) (0 5))
                         ((5 0) (1 1))))
 
-(define (payoff p1-action p2-action)
-  (cond ((and (or (= p1-action cooperate)
-                  (= p1-action defect))
-              (or (= p2-action cooperate)
-                  (= p2-action defect)))
-         (list-ref 
-           (list-ref payoff-matrix p1-action) p2-action))
-        (t (error 'payoff "Unknown actions ~a ~a" p1-action p2-action))))
+(define (payoff player my-action opponent-action)
+  (letrec* ((get-matrix
+              (lambda (player mtrx)
+                (if (equal? player player1)
+                  mtrx
+                  (transpose mtrx)))))
+    (cond ((and (or (= my-action cooperate)
+                  (= my-action defect))
+              (or (= opponent-action cooperate)
+                  (= opponent-action defect)))
+           (list-ref 
+             (list-ref (get-matrix player payoff-matrix) my-action) opponent-action))
+          (else 
+            (error 'payoff "Unknown actions ~a ~a" my-action opponent-action)))))
 				
-(modulo 10 3)
-
-(display (payoff cooperate defect))
+(display (payoff player1 cooperate defect))
+(newline)
+(display (payoff player2 cooperate defect))
+(newline)
