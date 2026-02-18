@@ -3,6 +3,7 @@
           defect
           player1
           player2
+          select-game
           payoff
           payoff+
           utility)
@@ -22,12 +23,15 @@
     (cond ((= action cooperate) 'cooperate)
           (else 'defect)))
 
-  (define payoff-matrix
-    (call-with-input-file "src/payoff.scm"
-                          (lambda (p) (read p))))
+  (define p1-matrix '()) 
+  (define p2-matrix '())
+  
+  (define (select-game n)
+    (set! p1-matrix
+      (call-with-input-file (string-append "src/game" (number->string n) ".scm")
+                            (lambda (p) (read p))))
+    (set! p2-matrix (transpose p1-matrix)))
 
-  (define p1-matrix payoff-matrix)
-  (define p2-matrix (transpose payoff-matrix))
 
   (define (get-matrix player)
     (cond ((eq? player player1) p1-matrix)

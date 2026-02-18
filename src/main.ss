@@ -11,6 +11,7 @@
       ; (else
         ; (display "defect")))
 
+(select-game 2)
 (let ((p1-action (maxmini player1))
       (p2-action (maxmini player2)))
   (display (payoff+ player1 p1-action p2-action))
