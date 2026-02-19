@@ -1,6 +1,8 @@
 (library (pdilemma strategy)
-  (export maxmini
-          maxmax
+  (export maximin
+          maximax
+          minimax
+          nash
           strategy)
   (import (chezscheme)
           (atelier-kame util)
@@ -19,21 +21,54 @@
       (cond ((> cu du) cu)
             (else du))))
 
-  (define (maxmini player)
+  (define (max-utility-by-opponent player opponent-action)
+    (let ((cu (utility player cooperate opponent-action))
+          (du (utility player defect opponent-action)))
+      (cond ((> cu du) cu)
+            (else du))))
+
+  (define (max-regret player my-action cmax dmax)
+    (let ((opcr (- cmax (utility player my-action cooperate)))
+          (opdr (- dmax (utility player my-action defect))))
+      (cond ((> opcr opdr) opcr)
+            (else opdr))))
+
+  (define (maximin player)
     (let ((cmin (min-utility player cooperate))
           (dmin (min-utility player defect)))
       (cond ((> cmin dmin) cooperate)
             (else defect))))
 
-  (define (maxmax player)
+  (define (maximax player)
     (let ((cmax (max-utility player cooperate))
           (dmax (max-utility player defect)))
       (cond ((> cmax dmax) cooperate)
             (else defect))))
+ 
+  (define (minimax player)
+    (let* ((cmax (max-utility-by-opponent player cooperate))
+           (dmax (max-utility-by-opponent player defect))
+           (crmax (max-regret player cooperate cmax dmax))
+           (drmax (max-regret player cooperate cmax dmax)))
+      (cond ((< crmax drmax) cooperate)
+            (else defect))))
+
+  (define (nash player)
+    (let ((cc (utility player cooperate cooperate))
+          (dc (utility player defect cooperate))
+          (cd (utility player cooperate defect))
+          (dd (utility player defect defect)))
+      (cond ((and (> cc dc)
+                  (> cd dd)) cooperate)
+            ((and (< cc dc)
+                  (< cd dd)) defect)
+            (else (error 'nash "Nash equilibrium not found")))))
   
   (define (strategy player choice)
-    (cond ((eq? choice 'maxmini) (maxmini player))
-          ((eq? choice 'maxmax) (maxmax player))
+    (cond ((eq? choice 'maximin) (maximin player))
+          ((eq? choice 'maximax) (maximax player))
+          ((eq? choice 'minimax) (minimax player))
+          ((eq? choice 'nash) (nash player))
           (else
             (error 'strategy "Unknown choice ~a ~a" player choice))))
 

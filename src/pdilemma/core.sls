@@ -55,12 +55,13 @@
           (else
            (error 'payoff "Unknown actions ~a ~a" my-action opponent-action))))
 
-  (define (play player my-action opponent-action v)
+  (define (play player my-action opponent-action callback)
     (let* ((acts (list (to-action-name my-action) 
                       (to-action-name  opponent-action)))
            (po (payoff player my-action opponent-action))
            (rst (list acts po)))
-      (v rst)))
+      (callback rst)
+      rst))
 
   (define (utility player my-action opponent-action)
     (car (payoff player my-action opponent-action)))

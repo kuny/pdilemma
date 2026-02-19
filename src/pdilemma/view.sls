@@ -2,7 +2,7 @@
   (export title
           print-games
           please-select
-          show-result)
+          print-result)
   (import (chezscheme))
 
 
@@ -24,9 +24,11 @@
   (define (please-select)
     (display "\nplease select a game file: "))
 
-  (define (show-result lst)
+  (define (print-result lst)
+    (newline)
     (display "result: ")
     (display lst)
+    (newline)
     (newline))
 
 )
