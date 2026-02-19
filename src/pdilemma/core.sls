@@ -3,9 +3,9 @@
           defect
           player1
           player2
-          select-game
+          initialize-game
           payoff
-          payoff+
+          play
           utility)
   (import (chezscheme)
           (atelier-kame util)
@@ -26,9 +26,9 @@
   (define p1-matrix '()) 
   (define p2-matrix '())
   
-  (define (select-game n)
+  (define (initialize-game game)
     (set! p1-matrix
-      (call-with-input-file (string-append "src/game" (number->string n) ".scm")
+      (call-with-input-file game
                             (lambda (p) (read p))))
     (set! p2-matrix (transpose p1-matrix)))
 
@@ -45,7 +45,7 @@
           (else
            (error 'payoff "Unknown actions ~a ~a" my-action opponent-action))))
 
-  (define (payoff+ player my-action opponent-action)
+  (define (play player my-action opponent-action)
     (let ((acts (list (to-action-name my-action) 
                       (to-action-name  opponent-action)))
           (po (payoff player my-action opponent-action)))
