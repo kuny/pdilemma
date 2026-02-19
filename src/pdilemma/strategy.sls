@@ -1,8 +1,6 @@
 (library (pdilemma strategy)
   (export maxmini
           maxmax
-          minimini
-          minimax
           strategy)
   (import (chezscheme)
           (atelier-kame util)
@@ -32,25 +30,10 @@
           (dmax (max-utility player defect)))
       (cond ((> cmax dmax) cooperate)
             (else defect))))
-
-  (define (minimini player)
-    (let ((cmin (min-utility player cooperate))
-          (dmin (min-utility player defect)))
-      (cond ((< cmin dmin) cooperate)
-            (else defect))))
-
-  (define (minimax player)
-    (let ((cmax (max-utility player cooperate))
-          (dmax (max-utility player defect)))
-      (cond ((< cmax dmax) cooperate)
-            (else defect))))
-
-
+  
   (define (strategy player choice)
     (cond ((eq? choice 'maxmini) (maxmini player))
           ((eq? choice 'maxmax) (maxmax player))
-          ((eq? choice 'minimini) (minimini player))
-          ((eq? choice 'minimax) (minimini player))
           (else
             (error 'strategy "Unknown choice ~ai ~a" player choice))))
 
