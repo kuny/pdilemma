@@ -1,5 +1,6 @@
 
 (import (chezscheme)
+        (atelier-kame util)
         (pdilemma view)
         (pdilemma core)
         (pdilemma strategy))
@@ -19,14 +20,14 @@
 (define (read-choice n)
   (please-select)
   (let* ((s (get-line (current-input-port)))
-         (k (and s (string->number s))))
+         (k (and s (to-number s))))
     (cond
       ((and k (integer? k) (<= 1 k) (<= k n)) (- k 1))
       (else (error 'read-choice "Invalid selection: ~a" s)))))
 
 (define (select-game)
-  (string-append "./data/"
-                 (list-ref games (read-choice (length games)))))
+  (concat "./data/"
+          (list-ref games (read-choice (length games)))))
 
 (define (main)
   (title)

@@ -3,7 +3,8 @@
           print-games
           please-select
           print-result)
-  (import (chezscheme))
+  (import (chezscheme)
+          (atelier-kame util))
 
 
   (define (title)
@@ -12,13 +13,12 @@
 
       (display "     Prisoner's Dilemma\n\n")
       
-      (display "🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢\n\n")
-      )
+      (display "🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢\n\n"))
 
   (define (print-games games n)
     (cond ((null? games) #t)
           (else
-            (display (string-append (number->string n) ": " (car games) "\n"))
+            (display (concat (to-string n) ": " (car games) "\n"))
             (print-games (cdr games) (+ n 1)))))
 
   (define (please-select)
