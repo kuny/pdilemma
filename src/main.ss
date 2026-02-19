@@ -30,7 +30,7 @@
                          (newline)
                          (print-games (cdr games) (+ n 1)))))))
       (print-games games 1)
-      (display "please select game file: ")
+      (display "please select a game file: ")
       (flush-output-port (current-output-port))
       (string-append "./data/" 
                      (list-ref games 
