@@ -35,6 +35,6 @@
     (cond ((eq? choice 'maxmini) (maxmini player))
           ((eq? choice 'maxmax) (maxmax player))
           (else
-            (error 'strategy "Unknown choice ~ai ~a" player choice))))
+            (error 'strategy "Unknown choice ~a ~a" player choice))))
 
 )
