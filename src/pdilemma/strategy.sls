@@ -1,9 +1,5 @@
 (library (pdilemma strategy)
-  (export maximin
-          maximax
-          minimax
-          nash
-          strategy)
+  (export strategy) 
   (import (chezscheme)
           (atelier-kame util)
           (pdilemma util)

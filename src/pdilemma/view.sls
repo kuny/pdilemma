@@ -22,11 +22,11 @@
             (print-games (cdr games) (+ n 1)))))
 
   (define (please-select)
-    (display "\nplease select a game file: "))
+    (display "\n🐢 please select a game file: "))
 
   (define (print-result lst)
     (newline)
-    (display "result: ")
+    (display "🐢 result: ")
     (display lst)
     (newline)
     (newline))
