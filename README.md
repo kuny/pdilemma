@@ -16,3 +16,5 @@ make run
 
 🐢 result: ((defect defect) (2 2))
 ```
+
+&copy; 2026 Atelier Kame
