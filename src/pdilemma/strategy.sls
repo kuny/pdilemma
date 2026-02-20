@@ -45,7 +45,7 @@
     (let* ((cmax (max-utility-by-opponent player cooperate))
            (dmax (max-utility-by-opponent player defect))
            (crmax (max-regret player cooperate cmax dmax))
-           (drmax (max-regret player cooperate cmax dmax)))
+           (drmax (max-regret player defect cmax dmax)))
       (cond ((< crmax drmax) cooperate)
             (else defect))))
 
