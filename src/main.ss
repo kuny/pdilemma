@@ -16,6 +16,7 @@
 ; (define p2 'nash)
 
 (define games (get-games))
+(define profiles (get-profiles))
 
 (define (read-choice n)
   (please-select)

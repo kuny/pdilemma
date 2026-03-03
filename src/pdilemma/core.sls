@@ -34,6 +34,12 @@
                    (string=? (substring filename (- len 4) len) ".scm"))))
           (directory-list "./data")))
 
+  (define (get-profikes)
+    (filter (lambda (filename)
+            (let ([len (string-length filename)])
+              (and (> len 3)
+                   (string=? (substring filename (- len 4) len) ".scm"))))
+          (directory-list "./profile")))
 
 
   (define (initialize-game game)
