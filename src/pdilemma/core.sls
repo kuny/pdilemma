@@ -4,6 +4,7 @@
           player1
           player2
           get-games
+          get-profiles
           initialize-game
           payoff
           play
@@ -34,7 +35,7 @@
                    (string=? (substring filename (- len 4) len) ".scm"))))
           (directory-list "./data")))
 
-  (define (get-profikes)
+  (define (get-profiles)
     (filter (lambda (filename)
             (let ([len (string-length filename)])
               (and (> len 3)
